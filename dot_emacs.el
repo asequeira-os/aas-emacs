@@ -14,6 +14,7 @@
 (use-package better-defaults :ensure t)
 (use-package dracula-theme :ensure t)
 (use-package flycheck :ensure t)
+(use-package company-terraform :ensure t)
 
 (defun aas-indent-buffer ()
   "Indents an entire buffer using the default intenting scheme."
@@ -80,6 +81,10 @@
     (define-key flyspell-mouse-map [down-mouse-3] #'flyspell-correct-word)
     (define-key flyspell-mouse-map [mouse-3] #'undefined)))
 
+(require 'company-terraform)
+(company-terraform-init)
+(add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode))
+(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 
 ;;-------- python --------------------------------------------------------
 (use-package elpy :ensure t)
