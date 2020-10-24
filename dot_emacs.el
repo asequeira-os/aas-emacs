@@ -149,5 +149,5 @@
 (load-theme 'dracula t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
 
-(setq ido-show-dot-for-dired t)
+(setq ido-show-dot-for-dired nil)
 (auto-save-visited-mode 1)
