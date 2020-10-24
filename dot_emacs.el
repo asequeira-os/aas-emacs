@@ -111,7 +111,7 @@
 
 
 ;; (use-package company :ensure t)
-;; (autoload 'company-mode "company" nil t)
+(autoload 'company-mode "company" nil t)
 ;(use-package ropemacs :ensure t)
 ;(use-package pymacs :ensure t)
 ;(require 'pymacs)
