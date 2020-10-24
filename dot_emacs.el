@@ -150,3 +150,4 @@
 (global-linum-mode t) ;; enable line numbers globally
 
 (setq ido-show-dot-for-dired t)
+(auto-save-visited-mode 1)
