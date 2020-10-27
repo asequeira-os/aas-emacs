@@ -59,6 +59,11 @@
 (windmove-default-keybindings 'meta)
 (setq framemove-hook-into-windmove t)
 
+(global-set-key (kbd "M-C-S-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "M-C-S-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "M-C-S-<down>") 'enlarge-window)
+(global-set-key (kbd "M-C-S-<up>") 'shrink-window)
+
 
 (add-hook 'org-mode-hook
           '(lambda ()
