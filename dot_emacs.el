@@ -16,6 +16,7 @@
 (use-package flycheck :ensure t)
 (use-package company-terraform :ensure t)
 (use-package magit :ensure t)
+(use-package powerline :ensure t)
 
 (defconst aas-emacs-repo-dir
   (file-name-directory (file-chase-links load-file-name))
@@ -144,7 +145,7 @@
  '(column-number-mode t)
  '(desktop-save-mode t)
  '(package-selected-packages
-   '(magit jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
+   '(powerline magit jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
  '(spell-command "aspell"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -160,3 +161,4 @@
 
 (setq ido-show-dot-for-dired nil)
 (auto-save-visited-mode 1)
+(powerline-default-theme)
