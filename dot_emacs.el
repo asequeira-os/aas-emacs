@@ -3,14 +3,21 @@
 (add-to-list 'package-archives
        '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
+(defconst aas-emacs-repo-dir
+  (file-name-directory (file-chase-links load-file-name))
+  "dir of the dot_emacs.el file from https://github.com/asequeira-os/aas-emacs")
+
+(load (concat aas-emacs-repo-dir "aas-util"))
+
 (package-initialize)
 (if (not (package-installed-p 'use-package))
     (progn
       (package-refresh-contents)
       (package-install 'use-package)))
 (package-refresh-contents)
-(require 'use-package)
 
+
+(require 'use-package)
 (use-package better-defaults :ensure t)
 (use-package dracula-theme :ensure t)
 (use-package flycheck :ensure t)
@@ -37,30 +44,6 @@
               ("C-p" . icomplete-backward-completions)
               ("C-v" . icomplete-vertical-toggle)))
 
-(defconst aas-emacs-repo-dir
-  (file-name-directory (file-chase-links load-file-name))
-  "dir of the dot_emacs.el file from https://github.com/asequeira-os/aas-emacs")
-
-(defun aas-indent-buffer ()
-  "Indents an entire buffer using the default intenting scheme."
-  (interactive)
-  (point-to-register 'o)
-  (delete-trailing-whitespace)
-  (indent-region (point-min) (point-max) nil)
-  (untabify (point-min) (point-max))
-  (jump-to-register 'o))
-
-(defun aas-save-and-indent ()
-  "indent while save buffer"
-  (interactive)
-  (save-buffer)
-  (aas-indent-buffer)
-  (save-buffer))
-
-(define-minor-mode sticky-buffer-mode
-  "Make the current window always display this buffer."
-  nil " sticky" nil
-  (set-window-dedicated-p (selected-window) sticky-buffer-mode))
 
 ;; Mac OSX - after brew install aspell
 (if (string-equal system-type "darwin")
