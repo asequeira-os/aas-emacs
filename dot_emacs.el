@@ -16,6 +16,10 @@
 (use-package flycheck :ensure t)
 (use-package company-terraform :ensure t)
 
+(defconst aas-emacs-repo-dir
+  (file-name-directory (file-chase-links load-file-name))
+  "dir of the dot_emacs.el file from https://github.com/asequeira-os/aas-emacs")
+
 (defun aas-indent-buffer ()
   "Indents an entire buffer using the default intenting scheme."
   (interactive)
