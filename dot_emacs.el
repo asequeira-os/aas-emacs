@@ -1,7 +1,7 @@
 ;;-*-Emacs-Lisp-*-
 (require 'package)
 (add-to-list 'package-archives
-       '("melpa" . "http://melpa.org/packages/") t)
+       '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 (if (not (package-installed-p 'use-package))
@@ -131,16 +131,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(before-save-hook (quote (delete-trailing-whitespace)))
+ '(before-save-hook '(delete-trailing-whitespace))
  '(bmkp-last-as-first-bookmark-file nil)
  '(bookmark-bmenu-file-column 60)
- '(calendar-date-style (quote iso))
+ '(calendar-date-style 'iso)
  '(case-fold-search t)
  '(column-number-mode t)
  '(desktop-save-mode t)
  '(package-selected-packages
-   (quote
-    (jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package)))
+   '(jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
  '(spell-command "aspell"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
