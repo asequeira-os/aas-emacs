@@ -15,6 +15,7 @@
 (use-package dracula-theme :ensure t)
 (use-package flycheck :ensure t)
 (use-package company-terraform :ensure t)
+(use-package magit :ensure t)
 
 (defconst aas-emacs-repo-dir
   (file-name-directory (file-chase-links load-file-name))
@@ -143,7 +144,7 @@
  '(column-number-mode t)
  '(desktop-save-mode t)
  '(package-selected-packages
-   '(jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
+   '(magit jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
  '(spell-command "aspell"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
