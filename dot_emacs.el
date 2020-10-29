@@ -18,6 +18,25 @@
 (use-package magit :ensure t)
 (use-package powerline :ensure t)
 
+(use-package icomplete-vertical
+  :ensure t
+  :demand t
+  :custom
+  (completion-styles '(partial-completion substring))
+  (completion-category-overrides '((file (styles basic substring))))
+  (read-file-name-completion-ignore-case t)
+  (read-buffer-completion-ignore-case t)
+  (completion-ignore-case t)
+  :config
+  (icomplete-mode)
+  (icomplete-vertical-mode)
+  :bind (:map icomplete-minibuffer-map
+              ("<down>" . icomplete-forward-completions)
+              ("C-n" . icomplete-forward-completions)
+              ("<up>" . icomplete-backward-completions)
+              ("C-p" . icomplete-backward-completions)
+              ("C-v" . icomplete-vertical-toggle)))
+
 (defconst aas-emacs-repo-dir
   (file-name-directory (file-chase-links load-file-name))
   "dir of the dot_emacs.el file from https://github.com/asequeira-os/aas-emacs")
@@ -145,7 +164,7 @@
  '(column-number-mode t)
  '(desktop-save-mode t)
  '(package-selected-packages
-   '(powerline magit jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
+   '(icomplete-vertical powerline magit jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
  '(spell-command "aspell"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -159,6 +178,6 @@
 (load-theme 'dracula t) ;; load material theme
 (global-linum-mode t) ;; enable line numbers globally
 
-(setq ido-show-dot-for-dired nil)
+;(setq ido-show-dot-for-dired nil)
 (auto-save-visited-mode 1)
 (powerline-default-theme)
