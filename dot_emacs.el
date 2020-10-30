@@ -1,7 +1,9 @@
 ;;-*-Emacs-Lisp-*-
 (require 'package)
 (add-to-list 'package-archives
-       '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+             '("melpa" . "https://melpa.org/packages/")
+;             '("melpa-stable" . "https://stable.melpa.org/packages/")
+             t)
 
 (defconst aas-emacs-repo-dir
   (file-name-directory (file-chase-links load-file-name))
@@ -99,29 +101,7 @@
 (add-to-list 'auto-mode-alist '("\\.tf\\'" . terraform-mode))
 (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 
-;;-------- python --------------------------------------------------------
-(use-package elpy :ensure t)
-(elpy-enable)
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-
-(eval-after-load "elpy"
-  '(cl-dolist (key '("M-<up>" "M-<down>" "M-<left>" "M-<right>"))
-     (define-key elpy-mode-map (kbd key) nil)))
-
-;; (setq elpy-rpc-python-command
-;; "/usr/local/bin/docker exec -it containername /container/python/pathn")
-;; (elpy-set-project-root "/pathin/container")
-
-;; temp
-;; (setq
-;;  python-shell-interpreter
-;; "/usr/local/bin/docker"
-;; python-shell-interpreter-args "exec -it containername /container/python/pathn -i"
-;; python-shell-completion-native-enable nil
-;; )
-
+(load (concat aas-emacs-repo-dir "aas-python"))
 
 ;; (use-package company :ensure t)
 (autoload 'company-mode "company" nil t)
@@ -145,9 +125,14 @@
  '(calendar-date-style 'iso)
  '(case-fold-search t)
  '(column-number-mode t)
+ '(completion-category-overrides '((file (styles basic substring))))
+ '(completion-ignore-case t t)
+ '(completion-styles '(partial-completion substring))
  '(desktop-save-mode t)
  '(package-selected-packages
-   '(icomplete-vertical powerline magit jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
+   '(poetry icomplete-vertical powerline magit jedi pymacs ropemacs company-mode flycheck dracula-theme better-defaults use-package))
+ '(read-buffer-completion-ignore-case t)
+ '(read-file-name-completion-ignore-case t)
  '(spell-command "aspell"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
