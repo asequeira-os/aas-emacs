@@ -1,8 +1,9 @@
 (use-package jedi
   :ensure t)
-(use-package pyenv-mode
-  :ensure t
-  :init (pyenv-mode))
+(add-hook 'python-mode-hook 'jedi:setup)
+;; (use-package pyenv-mode
+;;   :ensure t
+;;   :init (pyenv-mode))
 (use-package elpy
   :ensure t
   :config
@@ -10,25 +11,28 @@
   :bind (:map elpy-mode-map
               ("M-." . elpy-goto-definition))
   )
+
+;; from https://stackoverflow.com/questions/25154809/how-can-i-stop-elpy-from-overriding-some-of-my-keybindings/25159354
+(eval-after-load "elpy"
+  '(cl-dolist (key '("M-<up>" "M-<down>" "M-<left>" "M-<right>"))
+     (define-key elpy-mode-map (kbd key) nil)))
+
 (use-package poetry :ensure t)
 (add-hook 'elpy-mode-hook 'poetry-tracking-mode)
 
-(defun ssbb-pyenv-hook ()
-  "Automatically activates pyenv version if .python-version file exists."
-  (f-traverse-upwards
-   (lambda (path)
-     (let ((pyenv-version-path (f-expand ".python-version" path)))
-       (if (f-exists? pyenv-version-path)
-	   (pyenv-mode-set (s-trim (f-read-text pyenv-version-path 'utf-8))))))))
+;; (defun ssbb-pyenv-hook ()
+;;   "Automatically activates pyenv version if .python-version file exists."
+;;   (f-traverse-upwards
+;;    (lambda (path)
+;;      (let ((pyenv-version-path (f-expand ".python-version" path)))
+;;        (if (f-exists? pyenv-version-path)
+;; 	   (pyenv-mode-set (s-trim (f-read-text pyenv-version-path 'utf-8))))))))
 
-(add-hook 'find-file-hook 'ssbb-pyenv-hook)
+;; (add-hook 'find-file-hook 'ssbb-pyenv-hook)
+
 ;; (when (require 'flycheck nil t)
 ;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 ;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
-
-;; (eval-after-load "elpy"
-;;   '(cl-dolist (key '("M-<up>" "M-<down>" "M-<left>" "M-<right>"))
-;;      (define-key elpy-mode-map (kbd key) nil)))
 
 ;; (setq elpy-rpc-python-command
 ;; "/usr/local/bin/docker exec -it containername /container/python/pathn")
@@ -47,5 +51,5 @@
 ;;  (message "RPC binaries: '%s'" (executable-find elpy-rpc-python-command)))
 ;; (message "User binaries: '%s'" (executable-find elpy-rpc-python-command))
 
-(setq elpy-rpc-virtualenv-path 'current)
+;(setq elpy-rpc-virtualenv-path 'current)
 (setq elpy-rpc-python-command "python3")
