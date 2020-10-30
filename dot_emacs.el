@@ -59,7 +59,7 @@
 
 
 (global-set-key (kbd "<f12>") 'sticky-buffer-mode)
-(global-set-key (kbd "<f11>") 'bury-buffer)
+(global-set-key (kbd "\C-b") 'bury-buffer)
 (global-set-key (kbd "<f6>") 'save-buffer)
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
