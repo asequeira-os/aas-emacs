@@ -53,3 +53,4 @@
 
 ;(setq elpy-rpc-virtualenv-path 'current)
 (setq elpy-rpc-python-command "python3")
+(jedi:install-server)
