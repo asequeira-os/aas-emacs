@@ -17,8 +17,32 @@
   '(cl-dolist (key '("M-<up>" "M-<down>" "M-<left>" "M-<right>"))
      (define-key elpy-mode-map (kbd key) nil)))
 
-(use-package poetry :ensure t)
-(add-hook 'elpy-mode-hook 'poetry-tracking-mode)
+;; (use-package poetry :ensure t)
+;; (add-hook 'elpy-mode-hook 'poetry-tracking-mode)
+;; from https://github.com/galaunay/poetry.el/issues/14#issuecomment-589559666
+(use-package poetry
+  :ensure t
+  :config
+  (add-hook 'find-file-hook
+            (lambda () (poetry-track-virtualenv)))
+  (advice-add 'kill-buffer
+              :around
+              (lambda (func &rest args)
+                (let* ((next-buffer-name (buffer-file-name (other-buffer)))
+                       (both-file-buffers (and next-buffer-name buffer-file-name)))
+                  (apply func args)
+                  (if both-file-buffers (poetry-track-virtualenv)))))
+  (advice-add 'switch-to-buffer
+              :after
+              (lambda (&rest args)
+                (if buffer-file-name (poetry-track-virtualenv))))
+  (advice-add 'windmove-do-window-select
+              :after
+              (lambda (&rest args)
+                (if buffer-file-name (poetry-track-virtualenv))))
+  )
+
+
 
 ;; (defun ssbb-pyenv-hook ()
 ;;   "Automatically activates pyenv version if .python-version file exists."
