@@ -25,8 +25,11 @@
 (use-package flycheck :ensure t)
 (use-package company-terraform :ensure t)
 (use-package magit :ensure t)
+(use-package dired-k :ensure t
+  :init (define-key dired-mode-map (kbd "K") 'dired-k))
 (use-package powerline :ensure t)
 
+;; https://github.com/oantolin/icomplete-vertical
 (use-package icomplete-vertical
   :ensure t
   :demand t
