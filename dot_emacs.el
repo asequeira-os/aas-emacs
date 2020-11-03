@@ -105,6 +105,7 @@
 (add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
 
 (load (concat aas-emacs-repo-dir "aas-python"))
+(load (concat aas-emacs-repo-dir "aas-flutter"))
 
 ;; (use-package company :ensure t)
 (autoload 'company-mode "company" nil t)
