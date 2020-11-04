@@ -18,9 +18,14 @@
 
 
 (use-package projectile :ensure t) ;; project management
+(with-eval-after-load 'projectile
+  (add-to-list 'projectile-project-root-files-bottom-up "pubspec.yaml")
+  (add-to-list 'projectile-project-root-files-bottom-up "BUILD"))
+
 ;; (use-package yasnippet
 ;;   :ensure t
 ;;   :config (yas-global-mode)) ;; snipets
+
 (use-package lsp-ui :ensure t) ;; UI for LSP
 ;; (use-package company :ensure t) ;; Auto-complete
 
