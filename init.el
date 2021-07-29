@@ -1,4 +1,23 @@
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
 
+(setq package-selected-packages 
+  '(dart-mode lsp-mode lsp-dart lsp-treemacs flycheck company
+    ;; Optional packages
+    lsp-ui company hover))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
+  (package-refresh-contents)
+  (mapc #'package-install package-selected-packages))
+
+(add-hook 'dart-mode 'lsp)
+
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      company-minimum-prefix-length 1
+      lsp-lens-enable t
+      lsp-signature-auto-activate nil)
 ;; sources
 ;; https://lucidmanager.org/productivity/configure-emacs/
 
@@ -73,8 +92,8 @@
 
 
 ;; Theme
-(use-package dracula-theme
-	     :init (load-theme 'dracula t))
+;; (use-package dracula-theme
+;; 	     :init (load-theme 'dracula t))
 
 ;; native compilation
 ;; Silence compiler warnings as they can be pretty disruptive
@@ -175,4 +194,29 @@
 
 
 
+;; (setq package-selected-packages 
+;;   '(dart-mode lsp-mode lsp-dart lsp-treemacs flycheck company
+;;     ;; Optional packages
+;;     lsp-ui company hover))
+(use-package dart-mode)
+(use-package lsp-mode)
+(use-package lsp-dart)
+(use-package lsp-treemacs)
+
+
+(use-package company
+  :ensure t
+  :config
+  (setq company-idel-delay 0)
+  (setq company-minimum-prefix-length 3)
+
+  (global-company-mode 3))
+
+(add-hook 'dart-mode 'lsp)
+
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      company-minimum-prefix-length 1
+      lsp-lens-enable t
+      lsp-signature-auto-activate nil)
 
