@@ -1,23 +1,3 @@
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(package-initialize)
-
-(setq package-selected-packages 
-  '(dart-mode lsp-mode lsp-dart lsp-treemacs flycheck company
-    ;; Optional packages
-    lsp-ui company hover))
-
-(when (cl-find-if-not #'package-installed-p package-selected-packages)
-  (package-refresh-contents)
-  (mapc #'package-install package-selected-packages))
-
-(add-hook 'dart-mode 'lsp)
-
-(setq gc-cons-threshold (* 100 1024 1024)
-      read-process-output-max (* 1024 1024)
-      company-minimum-prefix-length 1
-      lsp-lens-enable t
-      lsp-signature-auto-activate nil)
 ;; sources
 ;; https://lucidmanager.org/productivity/configure-emacs/
 
@@ -79,6 +59,11 @@
   :ensure t
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 15)))
+
+;; (use-package session
+;;   :ensure t)
+;; (add-hook 'after-init-hook 'session-initialize)
+(desktop-save-mode 1)
 
 ;; column and line numbering
 (column-number-mode)
@@ -199,9 +184,14 @@
 ;;     ;; Optional packages
 ;;     lsp-ui company hover))
 (use-package dart-mode)
-(use-package lsp-mode)
+(use-package lsp-mode
+  :hook (dart-mode . lsp-deferred)
+  :commands (lsp lsp-deferred)
+  )
 (use-package lsp-dart)
 (use-package lsp-treemacs)
+(use-package lsp-ui)
+
 
 
 (use-package company
