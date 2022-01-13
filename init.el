@@ -5,7 +5,7 @@
 (setq inhibit-startup-message t
       cursor-type 'bar)
 ;; TODO following are not alwasy available, conditionalize
-;; (tool-bar-mode -1)
+(tool-bar-mode -1)
 ;; (menu-bar-mode -1)
 ;; (scroll-bar-mode -1)
 (setq visible-bell t)
@@ -210,3 +210,7 @@
       lsp-lens-enable t
       lsp-signature-auto-activate nil)
 
+(global-set-key (kbd "<f6>") 'save-buffer)
+(global-set-key (kbd "<f11>") 'bury-buffer)
+(global-set-key (kbd "<home>") 'move-beginning-of-line)
+(global-set-key (kbd "<end>") 'move-end-of-line)
