@@ -211,6 +211,6 @@
       lsp-signature-auto-activate nil)
 
 (global-set-key (kbd "<f6>") 'save-buffer)
-(global-set-key (kbd "<f11>") 'bury-buffer)
+(global-set-key (kbd "<f7>") 'bury-buffer)
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
