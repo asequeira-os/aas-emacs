@@ -55,10 +55,10 @@
 ;;   (ivy-mode 1))
 
 
-(use-package doom-modeline
-  :ensure t
-  :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 15)))
+;; (use-package doom-modeline
+;;   :ensure t
+;;   :init (doom-modeline-mode 1)
+;;   :custom ((doom-modeline-height 15)))
 
 ;; (use-package session
 ;;   :ensure t)
@@ -173,9 +173,9 @@
 (use-package docker
   :commands docker)
 
-(use-package docker-tramp
-  :defer t
-  :after docker)
+;; (use-package docker-tramp
+;;   :defer t
+;;   :after docker)
 
 
 
