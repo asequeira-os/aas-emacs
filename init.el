@@ -9,7 +9,7 @@
 ;; (menu-bar-mode -1)
 ;; (scroll-bar-mode -1)
 (setq visible-bell t)
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 180)
 
 ;; emacs driven local setting location
 ;; main file won't be overwritten
